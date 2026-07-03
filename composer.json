@@ -1,0 +1,22 @@
+{
+    "name": "webability/webability-php",
+    "description": "Cliente oficial en PHP para la API pública de WebAbility (https://api.webability.info).",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/webability/webability-php",
+    "authors": [
+        {
+            "name": "Philippe Thomassigny",
+            "homepage": "https://github.com/webability"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webability\\Api\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
