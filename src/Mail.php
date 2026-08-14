@@ -37,6 +37,14 @@ final class Recipient
 final class SendRequest
 {
     /**
+     * @param string $template Si viene, es el id de una plantilla ya
+     *   registrada y activa en templates_template bajo la cuenta que
+     *   autentica el request — el servidor arma el correo con esa plantilla
+     *   en vez de subject/html/text (que se ignoran si template viene). La
+     *   personalización se hace con las vars de $to, igual que en el envío
+     *   ad-hoc. El servidor valida que la plantilla exista y esté activa
+     *   ANTES de encolar el correo: si no, send() lanza una excepción con el
+     *   error de la API (códigos 3025/3026), no un envío "pending" fallido.
      * @param string[] $tags
      * @param bool $waitSend Si es true, el servidor espera (hasta ~20s) el
      *   resultado real del envío antes de responder, en vez de responder de
@@ -45,9 +53,10 @@ final class SendRequest
     public function __construct(
         public readonly Address $from,
         public readonly Recipient $to,
-        public readonly string $subject,
+        public readonly string $subject = '',
         public readonly string $html = '',
         public readonly string $text = '',
+        public readonly string $template = '',
         public readonly array $tags = [],
         public readonly bool $trackOpens = false,
         public readonly bool $trackClicks = false,
